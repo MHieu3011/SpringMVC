@@ -1,3 +1,4 @@
+<%@ page import="com.ptit.utils.SecurityUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp" %>
 <!-- Navigation -->
@@ -14,19 +15,22 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <c:if test="${not empty USERMODEL}">
-              <li class="nav-item">
-                <a class="nav-link" href='#'>Wellcome, ${USERMODEL.fullname}</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href='<c:url value="/trang-chu"/>'>Thoát</a>
-              </li>
-            </c:if>
-            <c:if test="${empty USERMODEL}">
-              <li class="nav-item">
-                <a class="nav-link" href='<c:url value="/dang-nhap?action=login"/>'>Đăng nhập</a>
-              </li>
-            </c:if>
+            <security:authorize access = "isAnonymous()">
+				<li class="nav-item">
+	                <a class="nav-link" href="#">Đăng ký</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href='<c:url value="/dang-nhap"/>'>Đăng nhập</a>
+	            </li>
+			</security:authorize>
+            <security:authorize access = "isAuthenticated()">
+				<li class="nav-item">
+	                <a class="nav-link" href="#">'>Welcome <%=SecurityUtil.getPrincipal().getFullName() %></a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href='<c:url value="/thoat"/>'>Thoát</a>
+	            </li>
+			</security:authorize>
           </ul>
         </div>
       </div>
