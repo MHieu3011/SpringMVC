@@ -62,6 +62,7 @@ public class JPAConfig {
 		// properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		// properties.setProperty("hibernate.hbm2ddl.auto", "create");
 		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		// properties.setProperty("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
 }
