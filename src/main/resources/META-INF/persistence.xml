@@ -4,6 +4,7 @@
         <class>com.ptit.entity.NewEntity</class>
         <class>com.ptit.entity.UserEntity</class>
         <class>com.ptit.entity.RoleEntity</class>
+        <class>com.ptit.entity.CategoryEntity</class>
     </persistence-unit>
 </persistence>
 
