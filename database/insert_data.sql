@@ -11,6 +11,12 @@ INSERT INTO user_role(userid,roleid) VALUES (1,1);
 INSERT INTO user_role(userid,roleid) VALUES (2,2);
 INSERT INTO user_role(userid,roleid) VALUES (3,2);
 
+INSERT INTO new(content,shortdescription,thumbnail,title) VALUES ('test1', 'tets1', 'test1', 'test1');
+INSERT INTO new(content,shortdescription,thumbnail,title) VALUES ('test2', 'test2', 'test2', 'test2');
+INSERT INTO new(content,shortdescription,thumbnail,title) VALUES ('test3', 'test3', 'test3', 'test3');
+INSERT INTO new(content,shortdescription,thumbnail,title) VALUES ('test4', 'test4', 'test4', 'test4');
+INSERT INTO new(content,shortdescription,thumbnail,title) VALUES ('test5', 'test5', 'test5', 'test5');
+
 select * from role;
 
 select * from user;
