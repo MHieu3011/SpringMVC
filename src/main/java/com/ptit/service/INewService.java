@@ -13,4 +13,10 @@ public interface INewService {
 	Integer getTotalItem();
 
 	NewDTO findOne(Long id);
+
+//	NewDTO insert(NewDTO newDTO);
+//
+//	NewDTO update(NewDTO newDTO);
+
+	NewDTO save(NewDTO newDTO);
 }

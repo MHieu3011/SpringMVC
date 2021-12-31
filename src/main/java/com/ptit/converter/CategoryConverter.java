@@ -8,18 +8,18 @@ import com.ptit.entity.CategoryEntity;
 @Component
 public class CategoryConverter {
 
-	public CategoryDTO toDTO(CategoryEntity entity) {
-		CategoryDTO result = new CategoryDTO();
-		result.setId(entity.getId());
-		result.setCode(entity.getCode());
-		result.setName(entity.getName());
-		return result;
+	public CategoryDTO toDTO(CategoryEntity categoryEntity) {
+		CategoryDTO categoryDTO = new CategoryDTO();
+		categoryDTO.setId(categoryEntity.getId());
+		categoryDTO.setCode(categoryEntity.getCode());
+		categoryDTO.setName(categoryEntity.getName());
+		return categoryDTO;
 	}
 
-	public CategoryEntity toEntity(CategoryDTO dto) {
-		CategoryEntity result = new CategoryEntity();
-		result.setCode(dto.getCode());
-		result.setName(dto.getName());
-		return result;
+	public CategoryEntity toEntity(CategoryDTO categoryDTO) {
+		CategoryEntity categoryEntity = new CategoryEntity();
+		categoryEntity.setCode(categoryDTO.getCode());
+		categoryEntity.setName(categoryDTO.getName());
+		return categoryEntity;
 	}
 }

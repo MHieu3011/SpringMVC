@@ -6,4 +6,5 @@ import com.ptit.entity.CategoryEntity;
 
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
 
+	CategoryEntity findOneByCode(String code);
 }

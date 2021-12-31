@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ptit.converter.NewConverter;
 import com.ptit.dto.NewDTO;
 import com.ptit.entity.NewEntity;
+import com.ptit.repository.CategoryRepository;
 import com.ptit.repository.NewRepository;
 import com.ptit.service.INewService;
 
@@ -18,6 +19,9 @@ public class NewService implements INewService {
 
 	@Autowired
 	private NewRepository newRepository;
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@Autowired
 	private NewConverter newConverter;
@@ -40,6 +44,34 @@ public class NewService implements INewService {
 	@Override
 	public NewDTO findOne(Long id) {
 		return newConverter.toDTO(newRepository.findOne(id));
+	}
+
+//	@Override
+//	public NewDTO insert(NewDTO newDTO) {
+//		NewEntity newEntity = newConverter.toEntity(newDTO);
+//		newEntity.setCategory(categoryRepository.findOneByCode(newDTO.getCategoryCode()));
+//		return newConverter.toDTO(newRepository.save(newEntity));
+//	}
+//
+//	@Override
+//	public NewDTO update(NewDTO newDTO) {
+//		NewEntity newEntity = newRepository.findOne(newDTO.getId());
+//		newEntity.setCategory(categoryRepository.findOneByCode(newDTO.getCategoryCode()));
+//		newEntity = newConverter.toEntity(newDTO, newEntity);
+//		return newConverter.toDTO(newRepository.save(newEntity));
+//	}
+
+	@Override
+	public NewDTO save(NewDTO newDTO) {
+		NewEntity newEntity = new NewEntity();
+		if (newDTO.getId() == null) { // insert
+			newEntity = newConverter.toEntity(newDTO);
+		} else { // update
+			newEntity = newRepository.findOne(newDTO.getId());
+			newEntity = newConverter.toEntity(newDTO, newEntity);
+		}
+		newEntity.setCategory(categoryRepository.findOneByCode(newDTO.getCategoryCode()));
+		return newConverter.toDTO(newRepository.save(newEntity));
 	}
 
 }
