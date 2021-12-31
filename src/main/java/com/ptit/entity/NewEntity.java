@@ -27,6 +27,14 @@ public class NewEntity extends BaseEntity {
 	@JoinColumn(name = "categoryid")
 	private CategoryEntity category;
 
+	public CategoryEntity getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
+	}
+
 	public String getTitle() {
 		return title;
 	}

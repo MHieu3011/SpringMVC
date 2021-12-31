@@ -63,9 +63,12 @@
 														<tr>
 															<td>${item.title}</td>
 															<td>${item.shortDescription}</td>
-															<td>																
+															<td>			
+																<c:url var="editNewUrl" value="/admin-new/edit">
+																	<c:param name="id" value="${item.id}" />
+																</c:url>													
 																<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-																   title="Cập nhật bài viết" href='#'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+																   title="Cập nhật bài viết" href='${editNewUrl}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 																</a>
 															</td>
 														</tr>
