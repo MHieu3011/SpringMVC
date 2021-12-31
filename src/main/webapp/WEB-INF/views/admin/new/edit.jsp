@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/common/taglib.jsp"%>
+<c:url var="newList" value="/admin-new/list?page=1&limit=2"/>
+<c:url var="newEdit" value="/admin-new/edit"/>
+<c:url var="newAPI" value="/api-new"/>
 <html>
 <head>
 <title>Chỉnh sửa bài viết</title>
@@ -29,7 +32,7 @@
 						<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Ảnh đại diện</label>
 								<div class="col-sm-9">
-									<input type="file" class="col-xs-10 col-sm-5" id="thumbnail" name="thumbnail"/>
+									<form:input path="thumbnail" cssClass="col-xs-10 col-sm-5"/>
 								</div>
 						</div>
 						<div class="form-group">
@@ -73,7 +76,48 @@
 	    e.preventDefault();
 	    var data = {};
 	    var formData = $('#formSubmit').serializeArray();
+	    $.each(formData, function (i, v) {
+            data[""+v.name+""] = v.value;
+        });
+	    var id = $('#newId').val();
+	    if (id == "") {
+	    	addNew(data);
+	    } else {
+	    	updateNew(data);
+	    }
 	});
+	
+	function addNew(data) {
+		$.ajax({
+            url: '${newAPI}',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (result) {
+            	window.location.href = "${newList}";
+            },
+            error: function (error) {
+            	window.location.href = "${newList}";
+            }
+        });
+	}
+	
+	function updateNew(data) {
+		$.ajax({
+            url: '${newAPI}',
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (result) {
+            	window.location.href = "${newList}";
+            },
+            error: function (error) {
+            	window.location.href = "${newList}";
+            }
+        });
+	}
 </script>
 </body>
 </html>
