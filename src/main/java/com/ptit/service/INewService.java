@@ -19,4 +19,6 @@ public interface INewService {
 //	NewDTO update(NewDTO newDTO);
 
 	NewDTO save(NewDTO newDTO);
+
+	void delete(long[] ids);
 }

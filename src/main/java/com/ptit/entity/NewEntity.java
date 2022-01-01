@@ -24,7 +24,7 @@ public class NewEntity extends BaseEntity {
 	private String content;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoryid")
+	@JoinColumn(name = "categoryid", nullable = false)
 	private CategoryEntity category;
 
 	public CategoryEntity getCategory() {

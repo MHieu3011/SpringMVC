@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="newList" value="/admin-new/list?page=1&limit=2"/>
+<c:url var="newList" value="/admin-new/list"/>
 <c:url var="newEdit" value="/admin-new/edit"/>
 <c:url var="newAPI" value="/api-new"/>
 <html>
@@ -13,6 +13,11 @@
 		<div class="page-content">
 			<div class="row">
 				<div class="col-xs-12">
+					<c:if test="${not empty message}">
+						<div class="alert alert-${alert}">
+  							${message}
+						</div>
+					</c:if>
 					<form:form class="form-horizontal" id="formSubmit" modelAttribute="model">
 						<div class="form-group">
 							  <label for="categoryCode" class="col-sm-3 control-label no-padding-right">Thể loại:</label>
@@ -95,10 +100,10 @@
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (result) {
-            	window.location.href = "${newList}";
+            	window.location.href = "${newEdit}?id="+result.id+"&message=insert_success";
             },
             error: function (error) {
-            	window.location.href = "${newList}";
+            	window.location.href = "${newList}?page=1&limit=2&message=error_system";
             }
         });
 	}
@@ -111,10 +116,10 @@
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (result) {
-            	window.location.href = "${newList}";
+            	window.location.href = "${newEdit}?id="+result.id+"&message=update_success";
             },
             error: function (error) {
-            	window.location.href = "${newList}";
+            	window.location.href = "${newList}?page=1&limit=2&message=error_system";
             }
         });
 	}

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ptit.converter.NewConverter;
 import com.ptit.dto.NewDTO;
@@ -47,6 +48,7 @@ public class NewService implements INewService {
 	}
 
 //	@Override
+//	@Transactional
 //	public NewDTO insert(NewDTO newDTO) {
 //		NewEntity newEntity = newConverter.toEntity(newDTO);
 //		newEntity.setCategory(categoryRepository.findOneByCode(newDTO.getCategoryCode()));
@@ -54,6 +56,7 @@ public class NewService implements INewService {
 //	}
 //
 //	@Override
+//	@Transactional
 //	public NewDTO update(NewDTO newDTO) {
 //		NewEntity newEntity = newRepository.findOne(newDTO.getId());
 //		newEntity.setCategory(categoryRepository.findOneByCode(newDTO.getCategoryCode()));
@@ -62,6 +65,7 @@ public class NewService implements INewService {
 //	}
 
 	@Override
+	@Transactional
 	public NewDTO save(NewDTO newDTO) {
 		NewEntity newEntity = new NewEntity();
 		if (newDTO.getId() == null) { // insert
@@ -72,6 +76,13 @@ public class NewService implements INewService {
 		}
 		newEntity.setCategory(categoryRepository.findOneByCode(newDTO.getCategoryCode()));
 		return newConverter.toDTO(newRepository.save(newEntity));
+	}
+
+	@Override
+	public void delete(long[] ids) {
+		for (long id : ids) {
+			newRepository.delete(id);
+		}
 	}
 
 }
